@@ -1,0 +1,11 @@
+Day 10-11 Git Assignment Problem
+
+Name:   VINOD KUMAR R
+email:  ravivinod21@gmail.com
+
+
+Problem 1 Link: https://github.com/vk0808/arithmetic-computation.git
+
+Problem 2 Link: https://github.com/vk0808/coinflip-simulator.git
+
+Problem 3 Link: https://github.com/vk0808/coinflip-simulator-2.git
