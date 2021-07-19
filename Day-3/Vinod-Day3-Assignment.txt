@@ -1,0 +1,153 @@
+Day 3 Assignment Problem
+
+Name:	VINOD KUMAR R
+email:	ravivinod21@gmail.com
+
+
+Question 2:
+
+#! /bin/bash -x
+
+
+echo "Program  to list files"
+
+
+for file in $( ls *.txt )
+do
+        # extract basename
+        folder=$( echo $file | awk -F. '{ print $1 }' )
+        if [ -d $folder ]
+        then
+                rm -r $folder
+        fi
+        mkdir $folder
+        cp $file $folder
+        ls $folder
+        #echo $folder
+done
+
+___________________________________________________________________________
+
+Question 3:
+
+#! /bin/bash -x
+
+
+echo "Program to append current date to all log files"
+
+
+touch abc.log.1 def.log.1 ghi.log.1 jkl.log.1 mno.log.1
+ls *.log.1
+today=`date +%d%m%Y`
+echo $today
+
+for file in $( ls *.log.1 )
+do
+        name=$( echo $file | awk -F. '{ print$1 }' )
+        mv $file $name-$today.log.1
+done
+
+ls *.log.1
+
+___________________________________________________________________________
+
+Question 4:
+
+find . -type f -mmin -30 -exec mv -t ./backup/ {} +
+
+___________________________________________________________________________
+
+Question 5:
+
+cat access.log | awk '{ print $7 }' | sort | uniq -c | sort -rn | head -4
+
+___________________________________________________________________________
+
+Question 6:
+
+cat access.log | grep "2019:1[0-9]" | awk '{ print$7}' | sort | uniq -c | sort -rn | head -4
+
+___________________________________________________________________________
+
+Question 7:
+
+cat access.log | awk '{ print $9 }' | sort | uniq -c | sort -rn | head -4
+
+___________________________________________________________________________
+
+Question 8:
+
+cat access.log | awk '{print $1}' | sort | uniq -c | sort -rn | head -4
+
+___________________________________________________________________________
+
+Question 9:
+
+#! /bin/bash -x
+
+folder="./temp/"
+if [ ! -e "$folder" ];
+then
+        mkdir $folder
+else
+        echo "folder $folder already exists.."
+fi
+
+___________________________________________________________________________
+
+Question 10:
+
+hello
+echo hello $?
+ls
+echo ls $?
+___________________________________________________________________________
+
+Question 11:
+
+#!/bin/bash -x
+
+usersecret="dH34xJaa23"
+#usersecret="dH34xJ23"
+
+if [ "$usersecret" == "dH34xJaa23" ]; then
+        echo "ERROR: the value is set"
+else
+        usersecret="dH34xJaa23"
+        echo $usersecret
+fi
+
+___________________________________________________________________________
+
+Question 12:
+
+grep -c systemd *.log
+
+___________________________________________________________________________
+
+Question 13:
+
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head
+
+___________________________________________________________________________
+
+Question 14:
+
+i) cat data.csv | awk '{ if($4>10000) print$2,$7 }'
+
+ii) cat data.csv | grep -i captain | awk '{sum=sum+$7} END { print sum }'
+
+iii) cat data.csv | awk '{ if($5 > 7000 && $5 < 10000) print $3,$5 }'
+
+iv) cat data.csv | awk '{sum=sum+$4} END { print sum/(NR-1) }'
+___________________________________________________________________________
+
+Question 15:
+
+mkdir original updated
+cp original-file.sh original/
+cp updated-file.sh updated/
+diff original/original-file.sh updated/updated-file.sh > changes.patch
+cp original/original-file.sh original-backup/
+sudo patch -N original/original-file.sh changes.patch
+diff original/original-file.sh updated/updated-file.sh

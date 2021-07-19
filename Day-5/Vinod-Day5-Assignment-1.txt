@@ -1,0 +1,113 @@
+Day 5 Sequence Assignment Problem
+
+Name:	VINOD KUMAR R
+email:	ravivinod21@gmail.com
+
+
+Question 1: 
+
+echo $(( RANDOM % 10 ))
+
+
+_______________________________________________________________________
+
+
+Question 2: 
+
+echo $(( RANDOM % 6 + 1))
+
+
+_______________________________________________________________________
+
+
+Question 3: 
+
+#! /bin/bash -x
+
+a=$(( RANDOM % 6 + 1 ))
+b=$(( RANDOM % 6 + 1 ))
+
+
+sum=$(( a + b))
+echo "Sum : " $sum
+
+
+_______________________________________________________________________
+
+
+Question 4:
+
+#! /bin/bash -x
+
+#read -p "Enter a 2 digit value: " num1
+#read -p "Enter a 2 digit value: " num2
+#read -p "Enter a 2 digit value: " num3
+#read -p "Enter a 2 digit value: " num4
+#read -p "Enter a 2 digit value: " num5
+
+num1=$((RANDOM%90 + 10))
+num2=$((RANDOM%90 + 10))
+num3=$((RANDOM%90 + 10))
+num4=$((RANDOM%90 + 10))
+num5=$((RANDOM%90 + 10))
+
+sum=$(( num1 + num2 + num3 + num4 + num5 ))
+average=$(( sum / 5 ))
+
+
+_______________________________________________________________________
+
+
+Question 5: a.
+
+#! /bin/bash -x
+
+IN_PER_FT=12
+
+#read -p "Enter inch to convert: " in
+
+in=$((RANDOM%10 + 1))
+ 
+ft=$(echo "scale = 2; $in / $IN_PER_FT" | bc )
+
+
+_______________________________________________________________________
+
+
+Question 5: b.
+
+#! /bin/bash -x
+
+MT_PER_FT=0.3048
+
+
+#read -p "Enter length in ft: " l
+#read -p "Enter width in ft: " b
+
+l=$((RANDOM%10 + 1))
+b=$((RANDOM%10 + 1))
+
+l_mt=$(echo "$l * $MT_PER_FT" | bc )
+h_mt=$(echo "$b * $MT_PER_FT" | bc )
+
+
+_______________________________________________________________________
+
+
+Question 5: c.
+
+#! /bin/bash -x
+
+MT_PER_FT=0.3048
+AC_PER_MT=0.000247105407
+
+#read -p "Enter length in ft: " l
+#read -p "Enter width in ft: " b
+#read -p "Enter no of plots: " n
+
+l=$((RANDOM%10 + 1))
+b=$((RANDOM%10 + 1))
+n=$((RANDOM%10 + 1))
+
+area=$(( l * b * n ))
+area_ac=$(echo "scale = 2; $area * $MT_PER_FT * $AC_PER_MT" | bc )

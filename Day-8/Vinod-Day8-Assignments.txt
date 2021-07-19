@@ -1,0 +1,144 @@
+Day 8 Dictionary Assignment Problem
+
+Name:	VINOD KUMAR R
+email:	ravivinod21@gmail.com
+
+
+Question 1: 
+
+#! /bin/bash -x
+
+# Variable
+reach=0
+
+# Declare a dictionary
+declare -A dice
+
+
+# Loop to create blank dictionary
+for((i=1; i<=6; i++))
+do
+        dice[$i]=0
+done
+
+
+# Loop to generate random value on each dice roll and store the respective count>while [ $reach -ne 1 ]
+do
+        num=$((RANDOM%6+1))
+
+        for((j=1; j<=6; j++))
+        do
+                if [ $num -eq $j ]; then
+                        dice[$j]=$((dice[$j]+1))
+                        if [ ${dice[$j]} -ge 10 ]; then
+                                reach=1
+                        fi
+                fi
+        done
+done
+
+
+
+# Loop to print dictionary
+for key in ${!dice[*]}
+do
+        echo face $key: ${dice[$key]}
+done
+
+
+
+# Finding max and min values
+max=0
+min=${RANDOM::3}
+
+for((i=1; i<=6; i++))
+do
+        if [ ${dice[$i]} -gt $max ]; then
+                max=${dice[$i]}
+                maxFace=$i
+        fi
+
+
+        if [ ${dice[$i]} -lt $min ]; then
+                min=${dice[$i]}
+                minFace=$i
+        fi
+done
+
+
+echo "Maximum rolled number $maxFace with $max times"
+echo "Minimum rolled number $minFace with $min times"
+
+_______________________________________________________________________
+
+
+Question 2: 
+
+
+#! /bin/bash -x
+
+# Declare a dictionary
+declare -A birth
+declare -A month
+
+
+# Loop to generate random birthday month for 50 persons and store it in dictionary
+for((i=1; i<=50; i++))
+do
+        birth[person_$i]=$((RANDOM%12+1))
+done
+
+
+# Loop to check persons having birthday same month and store the respectively in another dictionary
+for((mon=1; mon<=12; mon++))
+do
+        for per in ${!birth[*]}
+        do
+                if [ ${birth[$per]} -eq $mon ]; then
+                        month[$mon]="${month[$mon]} $per"
+
+                fi
+        done
+done
+
+
+# Function to get month
+function months(){
+        local month=$1
+
+        case $month in
+                1) echo "January" ;;
+                2) echo "February" ;;
+                3) echo "March" ;;
+                4) echo "April" ;;
+				5) echo "May" ;;
+                6) echo "June" ;;
+                7) echo "July" ;;
+                8) echo "August" ;;
+                9) echo "September" ;;
+                10) echo "October" ;;
+                11) echo "November" ;;
+                12) echo "December" ;;
+                *) echo '-' ;;
+        esac
+}
+
+
+
+# Loop to print dictionaries both cummulative and individual birthday months
+
+echo -e "Cummulative birthday list \n"
+for key in ${!month[*]}
+do
+        echo "$(months $key)" : ${month[$key]}
+done
+
+
+echo -e '\n'
+
+
+echo -e "Individual birthday list \n"
+for key in ${!birth[*]}
+do
+        echo $key: "$(months ${birth[$key]})"
+done

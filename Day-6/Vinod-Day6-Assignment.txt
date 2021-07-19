@@ -1,0 +1,470 @@
+Day 6 Repetition Assignment Problem (While loop)
+
+Name:	VINOD KUMAR R
+email:	ravivinod21@gmail.com
+
+
+Question 1: 
+
+
+#! /bin/bash -x
+
+num=$((RANDOM%11))
+
+index=0
+power=1
+ZERO_INDEX=0
+MAX_PW=256
+
+while [ $index -le $num ] && [ $power -lt $MAX_PW ]
+do
+        if [ $index -eq $ZERO_INDEX ]; then
+                echo $power
+        else
+                power=$(( power*2 ))
+                echo $power
+        fi
+        (( index++ ))
+done
+
+_______________________________________________________________________
+
+
+Question 2: 
+
+
+#! /bin/bash -x
+
+
+guess=-1
+low=0
+high=100
+num=0
+YES='yes'
+NO='no'
+
+
+echo "Guess the number game. Think of a number between 1-100"
+
+
+while [ $guess -ne $low ]
+do
+
+        mid=$(( (high + low) /2 ))
+
+        read -p "type yes/no: if number less than $mid - " que>
+
+        if [ "$query" = "$YES" ]; then
+                high=$mid
+        else
+                low=$mid
+        fi
+
+        if [ $low -eq $((high-1)) ]; then
+                guess=$low
+        fi
+
+done
+
+echo "The number is $guess"
+
+_______________________________________________________________________
+
+
+Question 3: 
+
+
+#! /bin/bash -x
+
+headCount=0
+tailCount=0
+count=0
+WIN_COUNT=11
+HEAD=1
+
+
+while [ $count -lt $WIN_COUNT ]
+do
+        coinFlip=$(( $RANDOM %2 ))
+
+        if [ $coinFlip -eq $HEAD ]; then
+                (( headCount++ ))
+                echo "heads $headCount"
+        else
+                (( tailCount++ ))
+                echo "tails $tailCount"
+        fi
+
+        if [ $headCount -gt $tailCount ]; then
+                count=$headCount
+        else
+                count=$tailCount
+        fi
+done
+
+_______________________________________________________________________
+
+
+Question 4:
+
+#! /bin/bash -x
+
+GOAL=200
+INITIAL_AMT=100
+BET_AMT=1
+BROKE=0
+WIN=1
+LOSS=0
+
+
+bal_Amt=$INITIAL_AMT
+win_Count=0
+no_Of_Bet=0
+
+
+while [ $bal_Amt -gt $BROKE ] && [ $bal_Amt -lt $GOAL ]
+do
+        bet=$(( RANDOM%2 ))
+        if [ $bet -eq $WIN ]; then
+                bal_Amt=$(( bal_Amt + BET_AMT ))
+                (( win_Count++ ))
+        else
+                bal_Amt=$(( bal_Amt - BET_AMT ))
+        fi
+        (( no_Of_Bet++ ))
+
+done
+
+echo "Win Count: $win_Count"
+echo "No of bets: $no_Of_Bet"
+
+
+_______________________________________________________________________
+_______________________________________________________________________
+
+
+
+Day 6 Repetition Assignment Problem (For loop)
+
+
+
+Question 1:
+
+#! /bin/bash -x
+
+num=$((RANDOM%21))
+
+
+power=1
+ZERO_INDEX=0
+
+
+for (( index=0;index<=num;index++ ))
+do
+        if [ $index -eq $ZERO_INDEX ]; then
+                echo $power
+        else
+                power=$(( power*2 ))
+                echo $power
+        fi
+done
+
+_______________________________________________________________________
+
+
+Question 2:
+
+
+#! /bin/bash -x
+
+# Random number btw 1-10
+num=$((RANDOM%10 + 1))
+
+
+# Harmonic number
+harmonic=1
+
+
+for (( index=2;index<=num;index++ ))
+do
+        harmonic=$(echo $harmonic $index | awk '{print $1 + (1>done
+
+echo 'HN of' $num ':' $harmonic
+
+
+_______________________________________________________________________
+
+
+Question 3:
+
+#! /bin/bash -x
+
+num=$((RANDOM%101))
+
+
+is_Prime=0
+
+
+for((index=2; index<=num/2; index++))
+do
+        if [ $((num % index)) -eq $is_Prime ]; then
+                echo "$num is not a prime number."
+                exit
+        fi
+done
+
+echo "$num is a prime number."
+
+_______________________________________________________________________
+
+
+Question 4:
+
+
+#! /bin/bash -x
+
+# Random number btw 2-101
+range=$((RANDOM%100 + 2))
+
+
+is_Prime=0
+
+
+for((n=2; n<=$range; n++))
+do
+
+        check=0
+
+        for((index=2; index<$n; index++))
+        do
+                if [ $((n % index)) -eq $is_Prime ]; then
+                        check=1
+                        break
+                fi
+        done
+        if [ $check -eq 0 ]; then
+                echo $n
+        fi
+done
+
+_______________________________________________________________________
+
+
+Question 5:
+
+#! /bin/bash -x
+
+num=$((RANDOM%21))
+
+
+factorial=1
+ZERO_INDEX=0
+
+
+if [ $num -eq $ZERO_INDEX ]; then
+        echo $factorial
+fi
+
+
+for (( index=1;index<=num;index++ ))
+do
+        factorial=$((factorial * index))
+        echo $factorial
+done
+
+_______________________________________________________________________
+
+
+Question 6:
+
+#! /bin/bash -x
+
+# Random number btw 2-101
+num=$((RANDOM%1000 + 1))
+
+
+echo "Prime factors of $num :"
+
+for((i=2; i<=$num; i++))
+do
+        if [ $((num % i)) -eq 0 ]; then
+
+                is_Prime=1
+
+
+                for((j=2; j<=($i/2); j++))
+                do
+                        if [ $((i % j)) -eq 0 ]; then
+                                is_Prime=0
+                                break
+                        fi
+                done
+
+                if [ $is_Prime -eq 1 ]; then
+                        echo $i
+                fi
+        fi
+
+done
+
+_______________________________________________________________________
+_______________________________________________________________________
+
+
+
+Day 6 Functions Assignment Problem (Functions)
+
+
+
+Question 1:
+
+
+#! /bin/bash -x
+
+function degreeF(){
+
+        read -p "Enter C temperature: " dc
+
+        if [[ $dc -ge 0 && $dc -le 100 ]]; then
+                df=$(echo $dc | awk '{ print ($1 * 9/5) + 32 }')
+                echo $df
+        else
+                echo "Enter within range 0-100"
+        fi
+}
+
+function degreeC(){
+
+        read -p "Enter F temperature: " df
+
+        if [[ $df -ge 32 && $df -le 212 ]]; then
+                dc=$(echo $df | awk '{ print ($1 - 32) * 5/9 }')              
+				echo $dc
+        else
+                echo "Enter within range 32-212"
+        fi
+
+}
+
+echo "Temperature Conversion"
+echo "1. C-F Scale"
+echo "2. F-C Scale "
+read -p "Choose: " choice
+
+case $choice in
+        1) echo $(degreeF) degF ;;
+        2) echo $(degreeC) degC ;;
+esac
+
+_______________________________________________________________________
+
+
+Question 2:
+
+
+#! /bin/bash -x
+
+# Random number btw 11-20
+num1=$((RANDOM%100))
+num2=$((RANDOM%100))
+
+#num1=171
+#num2=171
+
+rem=""
+rev=0
+
+
+function checkPalindrome() {
+        local temp=$1
+
+        for i in $temp
+        do
+                while [ "$i" -gt 0 ]
+                do
+                        rem=$((i%10))
+                        rev=$((rev*10+rem))
+                        i=$((i/10))
+                done
+        done
+
+        if [ $rev -eq $num2 ]; then
+                echo 1
+        else
+                echo 0
+        fi
+}
+
+pal=$(checkPalindrome $num1)
+
+_______________________________________________________________________
+
+
+Question 3:
+
+
+#! /bin/bash -x
+
+# Random number btw 2-101
+num=$((RANDOM%100 + 2))
+
+
+# Function to check if a number is prime or not
+function checkPrime() {
+
+        local n=$1
+
+        local PRIME=1
+        local NOT_PRIME=0
+
+
+        for((index=2; index<=n/2; index++))
+        do
+                if [ $((n % index)) -eq $NOT_PRIME ]; then
+                        echo $NOT_PRIME
+                        exit
+                fi
+        done
+
+        echo $PRIME
+}
+
+# Function to get the palindrome of a number
+function getPalindrome() {
+        rem=""
+        rev=0
+
+        local temp=$1
+
+        for i in $temp
+        do
+                while [ "$i" -gt 0 ]
+                do
+                        rem=$((i%10))
+                        rev=$((rev*10+rem))
+                        i=$((i/10))
+                done
+        done
+        echo $rev
+}
+
+
+# Function call
+prime1=$(checkPrime $num)
+
+
+# Check if the number is prime then show that its palindrome is also prime
+if [ $prime1 -eq 1 ]; then
+
+        # Function call
+        pal=$(getPalindrome $num)
+        prime2=$(checkPrime $pal)
+
+        if [ $prime2 -eq 1 ]; then
+                echo "$num $pal are prime numbers"
+        else
+                echo "$num is a prime, but $pal is not a prime"
+
+else
+        echo "$num is not a prime"
+fi

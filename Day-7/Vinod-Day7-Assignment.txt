@@ -1,0 +1,245 @@
+Day 7 Array Assignment Problem
+
+Name:	VINOD KUMAR R
+email:	ravivinod21@gmail.com
+
+
+Question 1: 
+
+#! /bin/bash -x
+
+
+# Declare an array
+declare -a array
+
+
+# Assign random values to an array
+for((i=0;i<10;i++))
+do
+        array[$i]=${RANDOM::3}
+done
+
+
+
+# Function to find second smallest
+function findMin() {
+
+        local first=${RANDOM::4}
+        local second=${RANDOM::4}
+
+        for key in ${!array[*]}
+        do
+                if [ ${array[$key]} -lt $first ]; then
+                        second=$first
+                        first=${array[$key]}
+                elif [ ${array[$key]} -lt $second -a ${array[$key]} -ne $first ]; then
+                        second=${array[$key]}
+                fi
+        done
+        echo $second
+}
+
+
+# Function to find second largest
+function findMax() {
+
+        local first=0
+        local second=0
+
+        for key in ${!array[*]}
+        do
+                if [ ${array[$key]} -gt $first ]; then
+                        second=$first
+                        first=${array[$key]}
+                elif [ ${array[$key]} -gt $second -a ${array[$key]} -ne $first ]; then
+                        second=${array[$key]}
+                fi
+        done
+        echo $second
+
+}
+
+
+# Print results
+echo Array: ${array[*]}
+echo Second Largest: $(findMax)
+echo Second Smallest: $(findMin)
+
+_______________________________________________________________________
+
+
+Question 2: 
+
+
+#! /bin/bash -x
+
+
+# Declare an array
+declare -a array
+declare -a temp
+
+
+# Assign random values to array
+for((i=0;i<10;i++))
+do
+        array[$i]=${RANDOM::3}
+done
+
+
+# Create length of array
+len=${#array[*]}
+
+
+# Function to sort
+function sortArray() {
+
+        for m in ${!array[*]}
+        do
+                for n in ${!array[*]}
+
+                do
+                        if [[ ${array[n]} -lt ${array[n+1]} ]]
+                        then
+                                num=${array[n]}
+                                array[n]=${array[n+1]}
+                                array[n+1]=$num
+                        fi
+                done
+        done
+        echo Sorted Array: ${array[@]}
+        echo Second largest: ${array[1]}
+        echo Second smallest: ${array[len-2]}
+}
+
+
+# Print results
+echo Array: ${array[*]}
+sortArray
+_______________________________________________________________________
+
+
+Question 3: 
+
+
+#! /bin/bash -x
+
+# Random number btw 2-101
+#num=$((RANDOM%1000 + 1))
+num=$1
+
+declare -a factors
+k=0
+
+
+echo "Prime factors of $num :"
+
+# even number divisible
+while [ $((num % 2)) -eq 0 ]
+do
+        factors[$((k++))]=2
+        num=$((num/2))
+        #((k++))
+done
+
+
+# num becames odd
+for((i=3; i*i<=$num; i++))
+do
+        while [ $((num % i)) -eq 0 ]
+        do
+                factors[$((k++))]=$i
+                num=$((num/i))
+                #((k++))
+        done
+done
+
+
+# print left prime no
+if [ $num -gt 2 ]; then
+        factors[$k]=$num
+fi
+
+
+echo ${factors[*]}
+
+_______________________________________________________________________
+
+
+Question 4:
+
+
+# Function to find triple integers whose sum equals to zero
+function findTriplets() {
+        local a=("$@")
+        local n=${#a[*]}
+
+        found=0
+
+        for((i=0; i<=n-2; i++))
+        do
+                for((j=i+1; j<n-1; j++))
+                do
+                        for((k=j+1; k<n; k++))
+                        do
+                                if [ $((a[i] + a[j] + a[k])) -eq 0 ]; then
+                                        echo ${a[i]} ${a[j]} ${a[k]}
+                                        found=1
+                                fi
+                        done
+                done
+        done
+
+        if [ $found -eq 0 ]; then
+                echo "triplets does not exist "
+        fi
+
+}
+
+
+a1=(0 -1 2 -3 1)
+# a2=(1 -2 1 0 5)
+# a3=(-1 0 1 2 -1 -4)
+
+
+findTriplets "${a1[@]}"
+
+_______________________________________________________________________
+
+
+Question 5:
+
+
+#! /bin/bash -x
+
+declare -a twice
+
+# Input to take range
+# read -p "Enter range starting range: " start
+# read -p "Enter range ending range: " end
+
+
+# Random range
+start=${RANDOM::2}
+end=${RANDOM::2}
+
+
+pos=0
+
+
+echo "Range: $start-$end"
+
+
+for((i=$start; i<=$end; i++))
+do
+        if [ $((i % 11)) -eq 0 ]; then
+                twice[((pos++))]=$i
+        fi
+done
+
+
+
+if [ ${#twice} -eq 0 ]; then
+        echo "no twice repeating digits found"
+else
+        echo ${twice[*]}
+fi
