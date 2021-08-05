@@ -10,6 +10,7 @@ harmonic=1
 
 for (( index=2;index<=num;index++ ))
 do
-        harmonic=$(echo $harmonic $index | awk '{print $1 + (1>done
+         harmonic=$(echo $harmonic $index | awk '{print $1 + (1/$2)}')
 
+done
 echo 'HN of' $num ':' $harmonic
